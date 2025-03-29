@@ -79,16 +79,43 @@ public class MyGraph <Ttype> {
 		
 		return false;
 	}
-	
-	
 	//addEdge
-	public void addEdge() {
+	public void addEdge(Ttype elementFrom, Ttype elementTo, int weight) throws Exception {
+		if(elementFrom == null || elementTo == null || weight <= 0) {
+			throw new Exception("Ievades parametrs nav atbilstošs!");
+		}
+		
+		if(doesVerticeExist(elementFrom)) {
+			throw new Exception("Virsotne, no kuras vēlas veidot saiti, neeksistē grafā!");
+		}
+		
+		if(doesVerticeExist(elementTo)) {
+			throw new Exception("Virsotne, uz kuru vēlas veidot saiti, neeksistē grafā!");
+		}
+		// vai ceļš jau eksistē
+		int indexOfElementFrom = getIndexOfVertice(elementFrom);
+		int indexOfElementTo = getIndexOfVertice(elementTo);
+		int possibleExistingEdge = edges[indexOfElementFrom][indexOfElementTo];
+		
+		if(possibleExistingEdge > 0) {
+			throw new Exception("Savienojums starp " + elementFrom + " un" + elementTo + " jau eksistē!");
+		}
+		
+		edges[indexOfElementFrom][indexOfElementTo] = weight;
 		
 	}
 	
-	
+	private int getIndexOfVertice(Ttype element) {
+		for(int i = 0; i < counter; i++) {
+			if(vertices[i].equals(element)) {
+				return i;
+			} 
+		} 
+		
+		return -1;
+	}
 	//print
-	//makeEmpty
+	
 	
 	
 	public void makeEmpty() {
