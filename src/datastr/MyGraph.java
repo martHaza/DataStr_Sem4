@@ -115,7 +115,23 @@ public class MyGraph <Ttype> {
 		return -1;
 	}
 	//print
-	
+	public void print() throws Exception {
+		if(isEmpty()) {
+			throw new Exception("Grafs ir tukšs un nav elementu, ko izprintēt!");
+		}
+		
+		for(int i = 0; i < counter; i++) { // rindas
+			System.out.println(vertices[i] + " ->");
+			
+			for(int j = 0; j < counter; j++) { // kolonnas
+				if(edges[i][j] > 0) {
+					System.out.println(vertices[j] + "(" + edges[i][j] + "); ");
+				}
+			}
+			
+			System.out.println();
+		}
+	}
 	
 	
 	public void makeEmpty() {
